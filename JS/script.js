@@ -53,7 +53,7 @@ const btnRight = document.querySelector('.btn-right');
 const slider = document.querySelector('#slider');
 const sliderSection = document.querySelectorAll('.slider-section');
 
-intervalo = setInterval(() => {moveToRight();}, 5000);
+let intervalo = setInterval(() => {moveToRight();}, 5000);
 
 btnLeft.addEventListener("click", () => {
     moveToLeft();
@@ -168,16 +168,4 @@ window.addEventListener('click', (e) => {
     }
 });
 
-formUnete.addEventListener('submit', (e) => {
-    e.preventDefault();
-    formUnete.style.display = 'none';
-    mensajeEnviado.style.display = 'block';
-
-    setTimeout(() => {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-        formUnete.reset();
-        formUnete.style.display = 'block';
-        mensajeEnviado.style.display = 'none';
-    }, 2500);
-});
+    
