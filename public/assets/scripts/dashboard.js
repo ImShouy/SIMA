@@ -648,6 +648,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const newPass = formData.get('new-password');
             const confirmPass = formData.get('confirm-password');
 
+            if (newPass.length < 8) {
+                addNotification('alert', 'Error', 'La nueva contraseña debe tener al menos 8 caracteres.');
+                return;
+            }
             // 1. Validate new password match
             if (newPass !== confirmPass) {
                 addNotification('alert', 'Error', 'Las contraseñas nuevas no coinciden.');
@@ -2152,4 +2156,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     checkIrrigationReminders();
 });
+
 
