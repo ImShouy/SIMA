@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIMA - Dashboard</title>
+    <link rel="stylesheet" href="public/assets/styles/fonts.css">
+    <link rel="stylesheet" href="public/assets/styles/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">SIMA</div>
+                <button class="toggle-menu" id="toggle-menu"><i class="fas fa-bars"></i></button>
+            </div>
+            
+            <button class="create-btn" id="btn-create-new">
+                <i class="fas fa-plus"></i>
+                <span>Crear Nuevo</span>
+            </button>
+
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active" data-target="home">
+                        <a href="#">
+                            <i class="fas fa-home"></i>
+                            <span>Inicio</span>
+                        </a>
+                    </li>
+                    <li data-target="parcels">
+                        <a href="#">
+                            <i class="fas fa-layer-group"></i>
+                            <span>Parcelas</span>
+                        </a>
+                    </li>
+                    <li data-target="devices">
+                        <a href="#">
+                            <i class="fas fa-microchip"></i>
+                            <span>Dispositivos IoT</span>
+                        </a>
+                    </li>
+                    <li data-target="linking">
+                        <a href="#">
+                            <i class="fas fa-link"></i>
+                            <span>Vinculación</span>
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="sidebar-divider"></div>
+
+                <ul>
+                    <li data-target="notifications">
+                        <a href="#">
+                            <i class="fas fa-bell"></i>
+                            <span>Notificaciones</span>
+                            <span class="badge">3</span>
+                        </a>
+                    </li>
+                    <li data-target="settings">
+                        <a href="#">
+                            <i class="fas fa-cog"></i>
+                            <span>Configuración</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar">U</div>
+                    <div class="user-info">
+                        <span class="name">Usuario</span>
+                        <span class="role">Agricultor</span>
+                    </div>
+                </div>
+                <button class="logout-btn" id="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-header">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Buscar en tu granja...">
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn"><i class="fas fa-question-circle"></i></button>
+                    <button class="icon-btn"><i class="fas fa-bell"></i></button>
+                    <button class="upgrade-btn">
+                        <i class="fas fa-crown"></i> Probar Premium
+                    </button>
+                </div>
+            </header>
+
+            <!-- Content Sections -->
+            <div class="content-wrapper">
+                
+                <!-- Home Section -->
+                <section id="home" class="view-section active">
+                    <div class="welcome-banner">
+                        <h1>¡Hola, Usuario! 👋</h1>
+                        <p>Aquí tienes un resumen de tu actividad reciente.</p>
+                    </div>
+                    
+                    <h2 class="section-title">Acceso Rápido</h2>
+                    <div class="quick-actions-grid">
+                        <div class="action-card" onclick="navigateTo('parcels')">
+                            <div class="icon-box green"><i class="fas fa-seedling"></i></div>
+                            <h3>Mis Parcelas</h3>
+                            <p>Gestiona tus cultivos</p>
+                        </div>
+                        <div class="action-card" onclick="navigateTo('devices')">
+                            <div class="icon-box yellow"><i class="fas fa-wifi"></i></div>
+                            <h3>Dispositivos</h3>
+                            <p>Monitorea tus sensores</p>
+                        </div>
+                        <div class="action-card" onclick="navigateTo('linking')">
+                            <div class="icon-box blue"><i class="fas fa-network-wired"></i></div>
+                            <h3>Vincular</h3>
+                            <p>Conecta dispositivos</p>
+                        </div>
+                    </div>
+
+                    <h2 class="section-title">Estado del Sistema</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <span class="stat-value">12</span>
+                            <span class="stat-label">Parcelas Activas</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-value">45</span>
+                            <span class="stat-label">Sensores Online</span>
+                        </div>
+                        <div class="stat-card warning">
+                            <span class="stat-value">2</span>
+                            <span class="stat-label">Alertas Pendientes</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Parcels Section -->
+                <section id="parcels" class="view-section">
+                    <div class="section-header">
+                        <h2>Mis Parcelas</h2>
+                        <button class="btn-primary" id="btn-add-parcel"><i class="fas fa-plus"></i> Nueva Parcela</button>
+                    </div>
+                    <div class="parcels-grid" id="parcels-container">
+                        <!-- Dynamic Content -->
+                        <div class="empty-state">
+                            <img src="public/assets/images/dashboards.jpg" alt="No parcels">
+                            <p>No tienes parcelas registradas aún.</p>
+                            <button class="btn-secondary">Registrar mi primera parcela</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Devices Section -->
+                <section id="devices" class="view-section">
+                    <div class="section-header">
+                        <h2>Dispositivos IoT</h2>
+                        <button class="btn-primary" id="btn-add-device"><i class="fas fa-plus"></i> Nuevo Dispositivo</button>
+                    </div>
+                    <div class="devices-list" id="devices-container">
+                        <!-- Dynamic Content -->
+                        <div class="empty-state">
+                            <i class="fas fa-microchip fa-3x"></i>
+                            <p>No hay dispositivos registrados.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Linking Section -->
+                <section id="linking" class="view-section">
+                    <div class="section-header">
+                        <h2>Vinculación</h2>
+                        <p>Asocia tus dispositivos IoT a tus parcelas para comenzar a monitorear.</p>
+                    </div>
+                    <div class="linking-interface">
+                        <div class="link-step">
+                            <h3>1. Selecciona una Parcela</h3>
+                            <select id="link-parcel-select" class="form-select">
+                                <option value="">Seleccionar...</option>
+                            </select>
+                        </div>
+                        <div class="link-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                        <div class="link-step">
+                            <h3>2. Selecciona Dispositivos</h3>
+                            <div id="link-devices-list" class="checkbox-list">
+                                <p class="text-muted">Selecciona una parcela primero</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="link-actions">
+                        <button class="btn-primary" id="btn-link-confirm" disabled>Vincular Dispositivos</button>
+                    </div>
+                </section>
+
+                <!-- Notifications Section -->
+                <section id="notifications" class="view-section">
+                    <h2>Notificaciones</h2>
+                    <div class="notifications-list">
+                        <div class="notification-item unread">
+                            <div class="notif-icon warning"><i class="fas fa-exclamation-triangle"></i></div>
+                            <div class="notif-content">
+                                <h4>Humedad baja en Parcela Norte</h4>
+                                <p>El sensor S-102 detectó niveles críticos.</p>
+                                <span class="time">Hace 10 min</span>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div class="notif-icon info"><i class="fas fa-info-circle"></i></div>
+                            <div class="notif-content">
+                                <h4>Reporte semanal disponible</h4>
+                                <p>Tu resumen de rendimiento está listo.</p>
+                                <span class="time">Hace 2 horas</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings" class="view-section">
+                    <h2>Configuración</h2>
+                    <div class="settings-panel">
+                        <div class="setting-group">
+                            <h3>Perfil</h3>
+                            <form>
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text" value="Usuario Demo">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" value="usuario@andeva.com">
+                                </div>
+                                <button class="btn-secondary">Guardar Cambios</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <!-- Add Parcel Modal -->
+    <div id="modal-parcel" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Nueva Parcela</h2>
+            <form id="form-parcel">
+                <div class="form-group">
+                    <label>Nombre de la Parcela</label>
+                    <input type="text" name="name" required placeholder="Ej. Parcela Norte">
+                </div>
+                <div class="form-group">
+                    <label>Tipo de Cultivo</label>
+                    <input type="text" name="crop" required placeholder="Ej. Maíz">
+                </div>
+                <div class="form-group">
+                    <label>Área (m²)</label>
+                    <input type="number" name="area" required placeholder="1000">
+                </div>
+                <button type="submit" class="btn-primary">Guardar Parcela</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Device Modal -->
+    <div id="modal-device" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Nuevo Dispositivo IoT</h2>
+            <form id="form-device">
+                <div class="form-group">
+                    <label>ID del Dispositivo (Serial)</label>
+                    <input type="text" name="serial" required placeholder="SN-123456">
+                </div>
+                <div class="form-group">
+                    <label>Nombre/Alias</label>
+                    <input type="text" name="name" required placeholder="Sensor Humedad 1">
+                </div>
+                <div class="form-group">
+                    <label>Tipo</label>
+                    <select name="type">
+                        <option value="humidity">Sensor de Humedad</option>
+                        <option value="temperature">Sensor de Temperatura</option>
+                        <option value="ph">Sensor de pH</option>
+                        <option value="station">Estación Meteorológica</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Registrar Dispositivo</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="public/assets/scripts/dashboard.js"></script>
+</body>
+</html>
