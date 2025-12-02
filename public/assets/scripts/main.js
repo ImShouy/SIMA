@@ -373,8 +373,8 @@ if (formRegister) {
             return;
         }
 
-        if (password.length < 6) {
-            showMessage('La contraseña debe tener al menos 6 caracteres', 'error');
+        if (password.length < 8) {
+            showMessage('La contraseña debe tener al menos 8 caracteres', 'error');
             return;
         }
 
@@ -585,4 +585,5 @@ window.onload = function () {
         }
     );
     google.accounts.id.prompt(); // Muestra el One Tap si es posible
+
 };
